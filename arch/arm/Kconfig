@@ -1,0 +1,119 @@
+#
+#
+#
+config BOARD_LINKER_SCRIPT
+	bool
+	default n
+
+config GENERIC_LINKER_SCRIPT
+	bool
+	default y
+	depends on !BOARD_LINKER_SCRIPT
+
+config ARM
+	bool
+	select HAS_KALLSYMS
+	select HAS_MODULES
+	select HAVE_CONFIGURABLE_MEMORY_LAYOUT
+	select HAVE_CONFIGURABLE_TEXT_BASE
+	default y
+
+menu "System Type"
+
+choice
+	prompt "ARM system type"
+
+config ARCH_AT91
+	bool "Atmel AT91"
+	select GENERIC_GPIO
+
+config ARCH_AT91RM9200
+	bool "Atmel AT91RM9200"
+	select CPU_ARM920T
+
+config ARCH_IMX
+	bool "Freescale iMX-based"
+	select GENERIC_GPIO
+
+config ARCH_NETX
+	bool "Hilscher NetX based"
+	select CPU_ARM926T
+
+config ARCH_OMAP
+	bool "TI OMAP"
+
+config ARCH_S3C24xx
+	bool "Samsung S3C2410, S3C2412, S3C2413, S3C2440, S3C2442, S3C2443"
+	select CPU_ARM920T
+
+endchoice
+
+source arch/arm/cpu/Kconfig
+source arch/arm/mach-at91/Kconfig
+source arch/arm/mach-at91rm9200/Kconfig
+source arch/arm/mach-imx/Kconfig
+source arch/arm/mach-netx/Kconfig
+source arch/arm/mach-omap/Kconfig
+source arch/arm/mach-s3c24xx/Kconfig
+
+config AEABI
+	bool "Use the ARM EABI to compile barebox"
+	help
+	  This option allows for barebox to be compiled using the latest
+	  ARM ABI (aka EABI).
+
+	  To use this you need GCC version 4.0.0 or later.
+
+endmenu
+
+menu "Arm specific settings         "
+
+config CMD_ARM_CPUINFO
+	bool "cpuinfo command"
+	default y
+	help
+	  Say yes here to get a cpuinfo command to show some
+	  information about the cp15 registers
+	
+config CMDLINE_TAG
+	bool "Send commandline to kernel"
+	default y
+	help
+	  If you want to start a 2.6 kernel say y here.
+
+config SETUP_MEMORY_TAGS
+	bool "send memory definition to kernel"
+	default y
+	help
+	  If you want to start a 2.6 kernel say y here.
+
+config INITRD_TAG
+	bool "send initrd params to kernel"
+	default y
+	help
+	  If you want to start a 2.6 kernel and use an
+	  initrd image say y here.
+
+config CPU_V7_DCACHE_SKIP
+	bool "Skip DCache Invlidate"
+	depends on CPU_V7
+	default n
+	help
+	  If your architecture configuration uses some other method of disabling caches, enable this
+	  So that the D-Cache invalidation logic is skipped
+
+config ARM_OPTIMZED_STRING_FUNCTIONS
+	bool "use assembler optimized string functions"
+	help
+	  Say yes here to use assembler optimized memcpy / memset functions.
+	  These functions work much faster than the normal versions but
+	  increase your binary size.
+
+endmenu
+
+source common/Kconfig
+source commands/Kconfig
+source net/Kconfig
+source drivers/Kconfig
+source fs/Kconfig
+source lib/Kconfig

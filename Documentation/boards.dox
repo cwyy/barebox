@@ -1,0 +1,46 @@
+/** @page supported_boards Supported Boards
+
+This is a list of boards that are currently supported by @a barebox.
+
+PowerPC type:
+
+@li @subpage pcm030
+
+ARM type:
+
+@li @subpage pcm037
+@li @subpage pcm038
+@li @subpage pcm043
+@li @subpage imx21ads
+@li @subpage imx27ads
+@li @subpage the3stack
+@li @subpage scb9328
+@li @subpage netx
+@li @subpage dev_omap_arch
+@li @subpage a9m2440
+@li @subpage a9m2410
+@li @subpage eukrea_cpuimx27
+
+Blackfin type:
+
+@li @subpage ipe337
+
+x86 type:
+
+@li nothing yet
+
+coldfire/m68k type:
+
+@li @subpage phycore_mcf54xx
+@li @subpage kp_ukd_r1
+
+*/
+
+/* TODO
+ *
+ * Add documentation to your boardfile, forward it with doxygen's page
+ * feature (@page <reference>) and include it here with:
+ *
+ * @subpage <reference>
+ *
+ */

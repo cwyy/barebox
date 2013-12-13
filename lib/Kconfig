@@ -1,0 +1,15 @@
+config ZLIB
+	bool
+
+config BZLIB
+	bool
+
+config CRC32
+	bool
+
+config CRC16
+	bool
+
+config GENERIC_FIND_NEXT_BIT
+	def_bool n
+

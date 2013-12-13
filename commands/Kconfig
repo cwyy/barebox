@@ -1,0 +1,295 @@
+config REGINFO
+	bool
+
+menu "Commands                      "
+
+menu "scripting                     "
+
+config CMD_EDIT
+	tristate
+	prompt "edit"
+
+config CMD_EXEC
+	depends on !SHELL_HUSH
+	tristate
+	prompt "exec"
+
+config CMD_SLEEP
+	tristate
+	prompt "sleep"
+
+config CMD_SAVEENV
+	tristate
+	select ENV_HANDLING
+	prompt "saveenv"
+
+config CMD_LOADENV
+	tristate
+	select ENV_HANDLING
+	prompt "loadenv"
+
+config CMD_EXPORT
+	tristate
+	prompt "export"
+
+config CMD_PRINTENV
+	tristate
+	prompt "printenv"
+
+config CMD_READLINE
+	tristate
+	prompt "readline"
+
+config CMD_TRUE
+	tristate
+	default y
+	prompt "true"
+
+config CMD_FALSE
+	tristate
+	default y
+	prompt "false"
+
+endmenu
+
+menu "file commands                 "
+
+config CMD_LS
+	tristate
+	default y
+	prompt "ls"
+
+config CMD_RM
+	tristate
+	default y
+	prompt "rm"
+
+config CMD_CAT
+	tristate
+	default y
+	prompt "cat"
+
+config CMD_MKDIR
+	tristate
+	default y
+	prompt "mkdir"
+
+config CMD_RMDIR
+	tristate
+	default y
+	prompt "rmdir"
+
+config CMD_CP
+	tristate
+	default y
+	prompt "cp"
+
+config CMD_PWD
+	tristate
+	default y
+	prompt "pwd"
+
+config CMD_CD
+	tristate
+	default y
+	prompt "cd"
+
+config CMD_MOUNT
+	tristate
+	default y
+	prompt "mount"
+
+config CMD_UMOUNT
+	tristate
+	default y
+	prompt "umount"
+
+endmenu
+
+menu "console                       "
+
+config CMD_CLEAR
+	tristate
+	default y
+	prompt "clear"
+
+config CMD_ECHO
+	tristate
+	default y
+	prompt "echo"
+
+endmenu
+
+menu "memory                        "
+
+config CMD_LOADB
+	select CRC16
+	tristate
+	prompt "loadb"
+
+config CMD_LOADY
+	select CRC16
+	depends on EXPERIMENTAL
+	bool
+	prompt "loady"
+
+config CMD_LOADS
+	depends on BROKEN
+	tristate
+	prompt "loads"
+
+config CMD_SAVES
+	depends on BROKEN
+	tristate
+	depends on CMD_LOADS
+	prompt "saves"
+
+config CMD_MEMINFO
+	tristate
+	prompt "meminfo"
+
+config CMD_MEMORY
+	bool
+	default y
+	prompt "md and mw"
+
+config CMD_CRC
+	tristate
+	select CRC32
+	prompt "crc"
+
+config CMD_MTEST
+	tristate
+	prompt "mtest"
+
+config CMD_MTEST_ALTERNATIVE
+	bool
+	depends on CMD_MTEST
+	prompt "alternative mtest implementation"
+
+endmenu
+
+menu "flash                         "
+
+config CMD_FLASH
+	tristate
+	prompt "protect/erase"
+endmenu
+
+
+menu "booting                       "
+
+config CMD_BOOTM
+	tristate
+	default y
+	select CRC32
+	prompt "bootm"
+
+config CMD_BOOTM_ZLIB
+	bool
+	depends on CMD_BOOTM
+	select ZLIB
+	prompt "bootm with zlib support"
+
+config CMD_BOOTM_BZLIB
+	bool
+	depends on CMD_BOOTM
+	select BZLIB
+	prompt "bootm with bzlib support"
+
+config CMD_BOOTM_SHOW_TYPE
+	bool
+	depends on CMD_BOOTM
+	prompt "show image information"
+
+config CMD_BOOTZ
+	tristate
+	default y
+	depends on ARM
+	prompt "bootz"
+	help
+	  compile in the 'bootz' command to start zImages
+
+config CMD_BOOTU
+	tristate
+	default y
+	depends on ARM
+	prompt "bootu"
+	help
+	   compile in the 'bootu' command to start raw (uncompressed)
+	   Linux images
+
+config CMD_RESET
+	tristate
+	prompt "reset"
+
+config CMD_GO
+	tristate
+	prompt "go"
+
+endmenu
+
+config CMD_TIMEOUT
+	tristate
+	prompt "timeout"
+
+config CMD_PARTITION
+	tristate
+	prompt "addpart/delpart"
+
+config CMD_TEST
+	tristate
+	depends on SHELL_HUSH
+	default y
+	prompt "test"
+	help
+	  shell like test function
+
+config CMD_REGINFO
+	depends on HAS_REGINFO
+	select REGINFO
+	tristate
+	prompt "reginfo"
+
+config CMD_VERSION
+	tristate
+	default y
+	prompt "version"
+
+config CMD_HELP
+	tristate
+	default y
+	prompt "help"
+
+config CMD_DEVINFO
+	tristate
+	default y
+	prompt "devinfo"
+
+config CMD_INSMOD
+	bool
+	depends on MODULES
+	default y
+	prompt "insmod"
+
+config CMD_LSMOD
+	bool
+	depends on MODULES
+	prompt "lsmod"
+
+config CMD_BMP
+	bool
+	depends on VIDEO
+	prompt "bmp"
+	help
+	  show bmp files on framebuffer devices
+
+config CMD_GPIO
+	bool
+	depends on GENERIC_GPIO
+	prompt "gpio commands"
+	help
+	  include gpio_set_value, gpio_get_value, gpio_direction_input and
+	  gpio_direction_output commands to control gpios.
+
+endmenu

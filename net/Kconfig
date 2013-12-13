@@ -1,0 +1,25 @@
+menuconfig NET
+	bool "Networking Support            "
+
+if NET
+
+config NET_DHCP
+	bool
+	prompt "dhcp support"
+
+config NET_RARP
+	bool
+	prompt "rarp protocol support"
+
+config NET_NFS
+	bool
+	prompt "nfs support"
+
+config NET_PING
+	bool
+	prompt "ping support"
+
+config NET_TFTP
+	bool
+	prompt "tftp support"
+endif
